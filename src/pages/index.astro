@@ -1,27 +1,12 @@
 ---
 import "./index.scss";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import retrato from "../assets/retrato_blu.png"
+import retrato from "../assets/retrato_blu.png";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 
 // Indica a Astro que esta página debe ser renderizada en el servidor
 // export const prerender = false;
-
-let mensaje = "";
-if (Astro.request.method === "POST") {
-	// Registra la cabecera Content-Type recibida para ayudar a diagnosticar
-	console.log(
-		`Cabecera Content-Type recibida: ${Astro.request.headers.get("Content-Type")}`,
-	);
-	const formData = await Astro.request.formData();
-	const nombre = formData.get("nombre");
-	const email = formData.get("email");
-	const mensajeForm = formData.get("mensaje");
-
-	console.log({ nombre, email, mensaje: mensajeForm });
-	mensaje = "Gracias por tu mensaje, pronto te estaré respondiendo!";
-}
 ---
 
 <BaseLayout title="Mi Portafolio">
@@ -34,14 +19,13 @@ if (Astro.request.method === "POST") {
 		<section class="c-section" id="sobre-mi">
 			<h2 class="c-section__title">Quién soy?</h2>
 			<div class="c-section__body">
-				<p>
-					Con una sólida trayectoria de cuatro años en desarrollo
-					front-end, domino tecnologías como Angular y JavaScript.
-					Además, integro habilidades en diseño gráfico, UX y diseño
-					web, utilizando herramientas de la suite Adobe y Figma. Mi
-					enfoque se centra en la mejora continua y la expansión de
-					mis conocimientos en el área de desarrollo.
-				</p>
+				Soy un profesional de IT con experiencia en diseño UX y
+				desarrollo web, capaz de cubrir el ciclo completo del diseño,
+				desde la investigación y prototipado (con Figma, Adobe XD) hasta
+				la implementación con HTML, SCSS y JavaScript ES6+. Destaco por
+				mi capacidad de colaboración, demostrada en proyectos como la
+				integración de prototipos con Angular 17 para empresas de salud
+				en Puerto Rico.
 			</div>
 			<img
 				src={retrato.src}
@@ -75,34 +59,32 @@ if (Astro.request.method === "POST") {
 		<section class="c-section" id="experiencia">
 			<h2 class="c-section__title">Mi experiencia</h2>
 			<div class="c-section__body">
-				Soy un profesional de IT con experiencia en diseño UX y
-				desarrollo web, capaz de cubrir el ciclo completo del diseño,
-				desde la investigación y prototipado (con Figma, Adobe XD) hasta
-				la implementación con HTML, SCSS y JavaScript ES6+. Destaco por
-				mi capacidad de colaboración, demostrada en proyectos como la
-				integración de prototipos con Angular 17 para empresas de salud
-				en Puerto Rico.
+				<p>
+					Con una sólida trayectoria de cuatro años en desarrollo
+					front-end, domino tecnologías como Angular y JavaScript.
+					Además, integro habilidades en diseño gráfico, UX y diseño
+					web, utilizando herramientas de la suite Adobe y Figma. Mi
+					enfoque se centra en la mejora continua y la expansión de
+					mis conocimientos en el área de desarrollo.
+				</p>
 			</div>
 		</section>
 		<section class="c-section" id="contacto">
 			<h2 class="c-section__title">Contactame!</h2>
 			<div class="c-section__body">
 				<p>
-					Podés contactarme a traves de LinkedIn haciendo click
+					Podés contactarme a través de LinkedIn haciendo click
 					<a
 						href="https://www.linkedin.com/in/tom%C3%A1s-cabrera/"
 						target="_blank">aquí</a
-					>, enviandome un correo a <a
+					>, enviándome un correo a <a
 						href="mailto:e.tomas.cabrera@gmail.com"
 						>e.tomas.cabrera@gmail.com</a
 					>
 					o completando el formulario de aquí abajo, y pronto estaremos
 					conversando.
 				</p>
-				<form
-					action="https://formsubmit.co/a0e7f1761136a918757612b9a39ef47d"
-					method="post"
-				>
+				<form method="post" id="contact-form">
 					<div class="c-form__group">
 						<label for="nombre"
 							>Nombre <span class="is-required">*</span></label
@@ -133,11 +115,19 @@ if (Astro.request.method === "POST") {
 						<textarea id="mensaje" name="mensaje" required
 						></textarea>
 					</div>
-					<button class="c-button" type="submit" value="Enviar"
-						>Enviar mensaje</button
+					<input
+						type="hidden"
+						name="_autoresponse"
+						value="Muchas gracias por enviar este mensaje, mientras tanto podés contactarme a través de mi perfil en LinkedIn: https://www.linkedin.com/in/tom%C3%A1s-cabrera/"
+					/>
+					<button
+						class="c-button"
+						type="submit"
+						value="Enviar"
+						id="submit-form">Enviar mensaje</button
 					>
 				</form>
-				{mensaje && <p>{mensaje}</p>}
+				<p id="mensaje-respuesta" hidden></p>
 			</div>
 		</section>
 	</main>
@@ -183,7 +173,113 @@ if (Astro.request.method === "POST") {
 			observer.observe(section);
 		});
 
-		// The console.log statements above can be helpful for debugging.
-		// Remember to remove them for production to keep the console clean.
+		// Validation
+		const runValidations = () => {
+			let isValid = true;
+			// Explicitly type the form elements
+			const nombreInput = document.getElementById("nombre") as HTMLInputElement;
+			const emailInput = document.getElementById("email") as HTMLInputElement;
+			const telefonoInput = document.getElementById("telefono") as HTMLInputElement;
+			const mensajeInput = document.getElementById("mensaje") as HTMLTextAreaElement;
+
+			// Reset previous invalid states
+			nombreInput.classList.remove("is-invalid");
+			emailInput.classList.remove("is-invalid");
+			telefonoInput.classList.remove("is-invalid");
+			mensajeInput.classList.remove("is-invalid");
+
+			// Get current values directly for validation
+			const data = {
+				nombre: nombreInput.value,
+				email: emailInput.value,
+				telefono: telefonoInput.value,
+				mensaje: mensajeInput.value,
+			};
+
+			if (!data.nombre) {
+				nombreInput.classList.add("is-invalid");
+				isValid = false;
+			}
+
+			if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+				emailInput.classList.add("is-invalid");
+				isValid = false;
+			}
+
+			if (!data.telefono) {
+				telefonoInput.classList.add("is-invalid");
+				isValid = false;
+			}
+
+			if (!data.mensaje) {
+				mensajeInput.classList.add("is-invalid");
+				isValid = false;
+			}
+
+			if (!isValid) {
+				console.log("Form validation failed");
+				return false; // Indicate validation failure
+			}
+			return true; // Indicate validation success
+		}
+
+		// Debounce function
+		let debounceTimer: number;
+		const debouncedValidate = () => {
+			clearTimeout(debounceTimer);
+			debounceTimer = window.setTimeout(() => {
+				runValidations();
+			}, 500);
+		};
+
+		const form = document.getElementById("contact-form") as HTMLFormElement;
+		const formInputs = form.querySelectorAll("input, textarea");
+
+		formInputs.forEach(input => {
+			input.addEventListener("keyup", debouncedValidate);
+		});
+
+		form?.addEventListener("submit", (event) => {
+			event.preventDefault(); // Prevents page reload
+			
+			if (!runValidations()) {
+				return; // Stop submission if validation fails
+			}
+
+			const formData = new FormData(form);
+			const data: {[key:string]:any} = {};
+			for (const [key, value] of formData.entries()) {
+				data[key] = value;				
+			}
+
+			let mensaje = null;
+
+			fetch("https://formsubmit.co/ajax/a0e7f1761136a918757612b9a39ef47d", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				body: JSON.stringify(data),
+			})
+				.then((response) => {
+					if (response.ok) {
+						mensaje =
+							"Gracias por tu mensaje, pronto te estaré respondiendo! Mientras tanto podés visitarme a mi LinkedIn por <a href='https://www.linkedin.com/in/tom%C3%A1s-cabrera/'>aquí</a>";
+						form.reset();
+					} else {
+						mensaje =
+							"Ha ocurrido un error al intentar enviar el formulario. Inténtalo de nuevo más tarde.";
+					}
+					document
+						.getElementById("mensaje-respuesta")
+						?.removeAttribute("hidden");
+					document.getElementById("mensaje-respuesta")!.innerHTML =
+						mensaje;
+					return response.json();
+				})
+				.then((data) => console.log(data))
+				.catch((error) => console.log(error));
+		});
 	});
 </script>

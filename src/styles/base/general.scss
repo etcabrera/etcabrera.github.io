@@ -3,6 +3,9 @@
     --ff-headers: "DM Serif Display", serif;
     --ff-body: "Inclusive Sans", sans-serif;
 }
+html {
+    overflow-x: hidden;
+}
 
 body {
     background-color: #140A29;
@@ -47,7 +50,7 @@ body {
     // Parallax por defecto (baja intensidad - mobile first)
     // P=2, D=1. Ideal scale = (2+1)/2 = 1.5. User factor = 0.88. Adjusted scale = 1.5 * 0.88 = 1.32
     transform: translateZ(-1px) scale(1.5);
-    height: 3050px; // Altura fija para el elemento de fondo
+    height: 2510px; // Altura fija para el elemento de fondo
 
     @media (min-width: 768px) {
         // Parallax de media intensidad (tablets)
