@@ -1,6 +1,7 @@
 ---
 import "./index.scss";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import retrato from "../assets/retrato_blu.png"
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 
@@ -43,7 +44,7 @@ if (Astro.request.method === "POST") {
 				</p>
 			</div>
 			<img
-				src="/src/assets/retrato_blu.png"
+				src={retrato.src}
 				alt="Foto de Tomás Cabrera"
 				id="retrato-me"
 			/>
