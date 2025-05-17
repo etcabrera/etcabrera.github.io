@@ -1,0 +1,165 @@
+:root {
+    --bshadow: 0 1px 4px 0 hsla(0, 0%, 0%, 0.2);
+    --ff-headers: "DM Serif Display", serif;
+    --ff-body: "Inclusive Sans", sans-serif;
+}
+
+body {
+    background-color: #140A29;
+    color: #fff;
+    margin: 0;
+
+    // Propiedades de scroll y perspectiva movidas de main a body
+    height: 100dvh;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    perspective: 2px;
+    position: relative; // Para el posicionamiento absoluto de .parallax
+    transform-style: preserve-3d;
+
+    opacity: 0;
+    /* Initially hidden */
+    transform: translateY(50px);
+    /* Start from slightly below */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+    /* Smooth transition for initial state */
+    &.loaded {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.parallax {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100dvw; // Cubre el ancho del viewport
+    z-index: -1; // Detrás del contenido
+
+    background-image: url("../assets/background.png");
+    background-attachment: scroll; // El fondo se mueve con el elemento .parallax transformado
+    background-position: top center; // Empezar desde la parte superior de la imagen
+    background-repeat: repeat; // La imagen se repetirá si es necesario
+    background-size: cover; // Cubrir el área del elemento .parallax
+
+    // Parallax por defecto (baja intensidad - mobile first)
+    // P=2, D=1. Ideal scale = (2+1)/2 = 1.5. User factor = 0.88. Adjusted scale = 1.5 * 0.88 = 1.32
+    transform: translateZ(-1px) scale(1.5);
+    height: 3050px; // Altura fija para el elemento de fondo
+
+    @media (min-width: 768px) {
+        // Parallax de media intensidad (tablets)
+        // P=2, D=2. Ideal scale = (2+2)/2 = 2.0. Adjusted scale = 2.0 * 0.88 = 1.76
+        transform: translateZ(-2px) scale(2);
+        height: 2900px; // Altura fija para el elemento de fondo
+    }
+
+    @media (min-width: 1200px) {
+        // Parallax de alta intensidad (escritorios - tu configuración original)
+        // P=2, D=3. User scale = 2.2
+        transform: translateZ(-3px) scale(3);
+        height: 3300px; // Altura fija para el elemento de fondo
+    }
+}
+
+main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--ff-body);
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--ff-headers);
+}
+
+h1 {
+    font-size: var(--fs-xxxl);
+    line-height: clamp(2rem, 10vw, 4rem);
+    letter-spacing: -1.5%;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+a {
+    color: #148532;
+
+    &:hover,
+    &:active,
+    &:visited {
+        color: #072C11;
+    }
+}
+
+.c-header {
+    &__subtitle {
+        color: #C2ADEB;
+        font-size: var(--fs-xl);
+        letter-spacing: -1%;
+        line-height: 1;
+        text-align: center;
+    }
+}
+
+.c-section {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    max-width: clamp(23rem, 80dvw, 40rem);
+
+    // Default state for sections (hidden, shifted down)
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+    // State when the section should be visible
+    &.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    // State for sections that have scrolled out of view upwards
+    &.is-hidden-up {
+        // opacity is already 0 if .is-visible is not present
+        transform: translateY(-50px); // Hidden by being shifted up
+    }
+
+    &:nth-child(odd) {
+        .c-section__title {
+            text-align: right;
+        }
+    }
+
+    &__title {
+        color: #C2ADEB;
+        font-size: var(--fs-xl);
+        left: 2rem;
+        letter-spacing: -0.5%;
+        margin-bottom: 0.1lh;
+    }
+
+    &__body {
+        background-color: #E0E4EB;
+        border-radius: 0.75rem;
+        color: #1A1A1A;
+        font-size: var(--fs-md);
+        line-height: 1.2;
+        padding: var(--fs-xl) var(--fs-xxxl);
+    }
+}

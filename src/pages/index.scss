@@ -1,0 +1,59 @@
+#retrato-me {
+    bottom: -0.1rem;
+    height: 12rem;
+    position: absolute;
+    right: -4rem;
+}
+
+.c-call_action {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: var(--fs-xl);
+    line-height: 1.2;
+    margin-block: 3rem 1rem;
+    max-width: clamp(23rem, 80dvw, 40rem);
+    text-align: center;
+    width: 100%;
+
+    p {
+        margin: 0;
+
+        span {
+            font-family: var(--ff-headers);
+            display: inline;
+        }
+    }
+
+    .c-button {
+        margin-top: 1rem
+    }
+}
+
+.c-caret__effect {
+    position: relative;
+
+    &::after {
+        animation: 1500ms blink ease-out infinite;
+        background-color: #21de53;
+        content: "";
+        color: transparent;
+        height: var(--fs-xxxl);
+        position: absolute;
+        right: -0.5rem;
+        top: 0.5rem;
+        width: 0.15rem;
+    }
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        background-color: transparent;
+    }
+
+    50% {
+        background-color: #21de53;
+    }
+}
