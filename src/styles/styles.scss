@@ -1,8 +1,9 @@
 //base
-@import "/node_modules/modern-normalize/modern-normalize.css";
-@import "./base/font-size";
-@import "./base/general";
+@use "/node_modules/modern-normalize/modern-normalize.css";
+@use "./base/variables";
+@use "./base/font-size";
+@use "./base/general";
 
 //components
-@import "./components/input";
-@import "./components/button";
+@use "./components/input";
+@use "./components/button";

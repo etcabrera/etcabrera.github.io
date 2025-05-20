@@ -7,7 +7,7 @@
     label {
         color: #281452;
         .is-required {
-            color: #D92626;
+            color: var(--clr-danger-500);
         }
     }
 
@@ -25,8 +25,13 @@
         }
 
         &.is-invalid {
-            border: 2px solid #D92626;
-            background: #F7D4D4;
+            border: 2px solid var(--clr-danger-500);
+            background: var(--clr-danger-050);
         }
+    }
+
+    .c-input__helper-text {
+        color: var(--clr-danger-500);
+        font-size: var(--fs-base);
     }
 }

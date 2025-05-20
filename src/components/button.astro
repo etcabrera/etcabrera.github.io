@@ -1,0 +1,14 @@
+---
+import "../styles/components/button.scss";
+const {text, type, onClick, disabled, className, id} = Astro.props
+---
+
+<button type={type} onclick={onClick} class={`c-button ${className}`} id={id}>
+    <slot/>
+    {text}
+</button>
+
+<script define:vars={{disabled}}>
+    const buttonElement = document.getElementsByTagName("button")[0];
+    disabled ? buttonElement.disabled = true : buttonElement.disabled = false;
+</script>

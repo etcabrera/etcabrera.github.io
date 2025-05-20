@@ -1,0 +1,72 @@
+:root {
+    // Fonts
+    --ff-headers: "DM Serif Display", serif;
+    --ff-body: "Inclusive Sans", sans-serif;
+
+    /* Colors */
+    --clr-white: hsl(0 0 100);
+    --clr-gray-050: hsl(0 0 95);
+    --clr-gray-100: hsl(0 0 90);
+    --clr-gray-200: hsl(0 0 80);
+    --clr-gray-300: hsl(0 0 70);
+    --clr-gray-400: hsl(0 0 60);
+    --clr-gray-500: hsl(0 0 50);
+    --clr-gray-600: hsl(0 0 40);
+    --clr-gray-700: hsl(0 0 30);
+    --clr-gray-800: hsl(0 0 20);
+    --clr-gray-900: hsl(0 0 10);
+    --clr-primary-050: hsl(216 60 95);
+    --clr-primary-100: hsl(216 60 90);
+    --clr-primary-200: hsl(216 60 80);
+    --clr-primary-300: hsl(216 60 70);
+    --clr-primary-400: hsl(216 60 60);
+    --clr-primary-500: hsl(216 60 50);
+    --clr-primary-600: hsl(216 60 40);
+    --clr-primary-700: hsl(216 60 30);
+    --clr-primary-800: hsl(216 60 20);
+    --clr-primary-900: hsl(216 60 10);
+    --clr-secondary-050: hsl(190 22 95);
+    --clr-secondary-100: hsl(190 22 90);
+    --clr-secondary-200: hsl(190 20 80);
+    --clr-secondary-300: hsl(190 20 70);
+    --clr-secondary-400: hsl(190 20 60);
+    --clr-secondary-500: hsl(190 20 50);
+    --clr-secondary-600: hsl(190 20 40);
+    --clr-secondary-700: hsl(190 20 30);
+    --clr-secondary-800: hsl(190 20 20);
+    --clr-secondary-900: hsl(190 20 10);
+    --clr-accent-050: hsl(31 84 95);
+    --clr-accent-100: hsl(31 84 90);
+    --clr-accent-200: hsl(31 84 80);
+    --clr-accent-300: hsl(31 84 70);
+    --clr-accent-400: hsl(31 84 60);
+    --clr-accent-500: hsl(31 84 50);
+    --clr-accent-600: hsl(31 84 40);
+    --clr-accent-700: hsl(31 84 30);
+    --clr-accent-800: hsl(31 84 20);
+    --clr-accent-900: hsl(31 84 10);
+    --clr-black: hsl(0 0 0);
+    --clr-danger-050: hsl(0 70 95);
+    --clr-danger-100: hsl(0 70 90);
+    --clr-danger-200: hsl(0 70 80);
+    --clr-danger-300: hsl(0 70 70);
+    --clr-danger-400: hsl(0 70 60);
+    --clr-danger-500: hsl(0 70 50);
+    --clr-danger-600: hsl(0 70 40);
+    --clr-danger-700: hsl(0 70 30);
+    --clr-danger-800: hsl(0 70 20);
+    --clr-danger-900: hsl(0 70 10);
+    --clr-warning-050: hsl(45 70 95);
+    --clr-warning-100: hsl(45 70 90);
+    --clr-warning-200: hsl(45 70 80);
+    --clr-warning-300: hsl(45 70 70);
+    --clr-warning-400: hsl(45 70 60);
+    --clr-warning-500: hsl(45 70 50);
+    --clr-warning-600: hsl(45 70 40);
+    --clr-warning-700: hsl(45 70 30);
+    --clr-warning-800: hsl(45 70 20);
+    --clr-warning-900: hsl(45 70 10);
+
+    // Effects
+    --bshadow: 0 1px 4px 0 hsla(0 0 0 / 0.2);
+}

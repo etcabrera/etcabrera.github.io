@@ -35,7 +35,6 @@
 
     &::after {
         animation: 1500ms blink ease-out infinite;
-        background-color: #21de53;
         content: "";
         color: transparent;
         height: var(--fs-xxxl);
@@ -54,6 +53,6 @@
     }
 
     50% {
-        background-color: #21de53;
+        background-color: var(--clr-accent-500);
     }
 }

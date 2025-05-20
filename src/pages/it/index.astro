@@ -1,28 +1,34 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
-import "./index.scss";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import retrato from "../assets/retrato_blu.png";
-import Button from "../components/button.astro";
+import "../index.scss";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import retrato from "../../assets/retrato_blu.png";
+import Button from "../../components/button.astro";
 import Send from "@lucide/astro/icons/send";
 import Languages from "@lucide/astro/icons/languages";
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 
 const Year = new Date().getFullYear();
 ---
 
-<BaseLayout title="Mi Portafolio">
+<BaseLayout title="Il mio portfolio">
 	<nav class="c-nav">
 		<Languages />
-		Disponible en otros idiomas:
+		Disponibile in altri linguaggi:
 		<ul class="c-nav__list">
 			<li class="c-nav__item">
-				<a href="#" class="c-nav__item-link">Esp</a>
+				<a
+					href={getRelativeLocaleUrl("es", "/")}
+					class="c-nav__item-link">Esp</a
+				>
 			</li>
 			<li class="c-nav__item">
-				<a href={getRelativeLocaleUrl("en", "/")} class="c-nav__item-link">Eng</a>
+				<a
+					href={getRelativeLocaleUrl("en", "/")}
+					class="c-nav__item-link">Eng</a
+				>
 			</li>
 			<li class="c-nav__item">
-				<a href={getRelativeLocaleUrl("it", "/")} class="c-nav__item-link">Ita</a>
+				<a href="#" class="c-nav__item-link">Ita</a>
 			</li>
 		</ul>
 	</nav>
@@ -33,15 +39,15 @@ const Year = new Date().getFullYear();
 			<p class="c-header__subtitle">UX/UI & Web Developer</p>
 		</section>
 		<section class="c-section" id="sobre-mi">
-			<h2 class="c-section__title">Quién soy?</h2>
+			<h2 class="c-section__title">Chi sono?</h2>
 			<div class="c-section__body">
-				Soy un profesional de IT con experiencia en diseño UX y
-				desarrollo web, capaz de cubrir el ciclo completo del diseño,
-				desde la investigación y prototipado (con Figma, Adobe XD) hasta
-				la implementación con HTML, SCSS y JavaScript ES6+. Destaco por
-				mi capacidad de colaboración, demostrada en proyectos como la
-				integración de prototipos con Angular 17 para empresas de salud
-				en Puerto Rico.
+				Sono un professionista IT con esperienza in UX design e sviluppo
+				web, in grado di coprire l'intero ciclo di progettazione, dalla
+				ricerca e prototipazione (con Figma, Adobe XD)
+				all'implementazione con HTML, SCSS e JavaScript ES6+. Mi
+				distinguo per la mia capacità di collaborazione, dimostrata in
+				progetti come l'integrazione di prototipi con Angular 17 per
+				aziende sanitarie di Porto Rico.
 			</div>
 			<img
 				src={retrato.src}
@@ -50,60 +56,59 @@ const Year = new Date().getFullYear();
 			/>
 		</section>
 		<section class="c-section" id="servicios">
-			<h2 class="c-section__title">Cuáles son mis servicios?</h2>
+			<h2 class="c-section__title">Cuali sono i miei servizi?</h2>
 			<div class="c-section__body">
-				Como Diseñador UX/UI, ofrezco servicios que abarcan la
-				investigación de usuarios, la creación de wireframes y
-				prototipos, y el diseño de interfaces, buscando siempre una
-				experiencia de usuario óptima. En Desarrollo Web, tengo
-				experiencia creando aplicaciones front-end con Angular, HTML,
-				SCSS, JavaScript y jQuery, brindando soluciones funcionales.
+				Come UX/UI Designer, offro servizi che comprendono ricerca sugli
+				utenti, wireframing e prototipazione, e design dell'interfaccia,
+				sempre alla ricerca di un'esperienza utente ottimale. Nello
+				sviluppo web, ho esperienza nella creazione di applicazioni
+				front-end con Angular, HTML, SCSS, JavaScript e jQuery, fornendo
+				soluzioni funzionali.
 			</div>
 		</section>
 		<div class="c-call_action">
 			<p>
-				Tu proyecto ideal está a <span>un click</span>
+				Il vostro progetto ideale è a portata <span>di click</span>
 			</p>
 			<Button
 				className="c-button is-primary"
 				onClick="document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })"
-				text="Contactame ahora!"
+				text="Contattami ora!"
 			>
 				<Send />
 			</Button>
 		</div>
 		<section class="c-section" id="experiencia">
-			<h2 class="c-section__title">Mi experiencia</h2>
+			<h2 class="c-section__title">La mia esperienza</h2>
 			<div class="c-section__body">
 				<p>
-					Con una sólida trayectoria de cuatro años en desarrollo
-					front-end, domino tecnologías como Angular y JavaScript.
-					Además, integro habilidades en diseño gráfico, UX y diseño
-					web, utilizando herramientas de la suite Adobe y Figma. Mi
-					enfoque se centra en la mejora continua y la expansión de
-					mis conocimientos en el área de desarrollo.
+					Ho quattro anni di esperienza solida nello sviluppo
+					front-end, sono competente in tecnologie come Angular e
+					JavaScript. Inoltre, integro competenze di graphic design,
+					UX e web design, utilizzando strumenti della suite Adobe e
+					Figma. Il mio obiettivo è il miglioramento continuo e
+					l'ampliamento delle mie conoscenze di sviluppo.
 				</p>
 			</div>
 		</section>
 		<section class="c-section" id="contacto">
-			<h2 class="c-section__title">Contactame!</h2>
+			<h2 class="c-section__title">Contattami!</h2>
 			<div class="c-section__body">
 				<p>
-					Podés contactarme a través de LinkedIn haciendo click
+					Potete raggiungermi direttamente su LinkedIn cliccando
 					<a
 						href="https://www.linkedin.com/in/tom%C3%A1s-cabrera/"
-						target="_blank">aquí</a
-					>, enviándome un correo a <a
+						target="_blank">qui</a
+					>, inviandomi un'email su <a
 						href="mailto:e.tomas.cabrera@gmail.com"
 						>e.tomas.cabrera@gmail.com</a
 					>
-					o completando el formulario de aquí abajo, y pronto estaremos
-					conversando.
+					oppure compilando il modulo sottostante. Ci sentiremo presto!
 				</p>
 				<form method="post" id="contact-form">
 					<div class="c-form__group">
 						<label for="nombre"
-							>Nombre <span class="is-required">*</span></label
+							>Nome <span class="is-required">*</span></label
 						>
 						<input type="text" id="nombre" name="nombre" required />
 						<span class="c-input__helper-text"></span>
@@ -117,7 +122,7 @@ const Year = new Date().getFullYear();
 					</div>
 					<div class="c-form__group">
 						<label for="telefono"
-							>Teléfono <span class="is-required">*</span></label
+							>Telefono <span class="is-required">*</span></label
 						>
 						<input
 							type="tel"
@@ -129,7 +134,7 @@ const Year = new Date().getFullYear();
 					</div>
 					<div class="c-form__group">
 						<label for="mensaje"
-							>Mensaje <span class="is-required">*</span></label
+							>Menssaggio <span class="is-required">*</span></label
 						>
 						<textarea id="mensaje" name="mensaje" required
 						></textarea>
@@ -138,12 +143,12 @@ const Year = new Date().getFullYear();
 					<input
 						type="hidden"
 						name="_autoresponse"
-						value="Muchas gracias por enviar este mensaje, mientras tanto podés contactarme a través de mi perfil en LinkedIn: https://www.linkedin.com/in/tom%C3%A1s-cabrera/"
+						value=""
 					/>
 					<Button
 						className="is-primary"
 						type="submit"
-						text="Enviar mensaje"
+						text="Inviare messaggio"
 						id="submit-form"
 					>
 						<Send />
@@ -154,7 +159,7 @@ const Year = new Date().getFullYear();
 		</section>
 	</main>
 	<footer class="c-footer">
-		{Year}, Tomás Cabrera. Todos los derechos reservados.
+		{Year}, Tomás Cabrera. Tutti i diritti riservati.
 	</footer>
 </BaseLayout>
 
@@ -249,30 +254,29 @@ const Year = new Date().getFullYear();
 
 			if (!data.nombre) {
 				nombreInput.classList.add("is-invalid");
-				nombreHelper.innerHTML = "Este campo es obligatorio";
+				nombreHelper.innerHTML = "Il campo è obbligatorio";
 				isValid = false;
 			}
 
 			if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
 				emailInput.classList.add("is-invalid");
-				emailHelper.innerHTML = "Formato de email inválido";
+				emailHelper.innerHTML = "Formato e-mail non valido";
 				isValid = false;
 			}
 
 			if (!data.telefono) {
 				telefonoInput.classList.add("is-invalid");
-				telefonoHelper.innerHTML = "Este campo es obligatorio";
+				telefonoHelper.innerHTML = "Il campo è obbligatorio";
 				isValid = false;
 			}
 
 			if (!data.mensaje) {
 				mensajeInput.classList.add("is-invalid");
-				mensajeHelper.innerHTML = "Este campo es obligatorio";
+				mensajeHelper.innerHTML = "Il campo è obbligatorio";
 				isValid = false;
 			}
 
 			if (!isValid) {
-				console.log("Form validation failed");
 				return false; // Indicate validation failure
 			}
 			return true; // Indicate validation success
@@ -323,11 +327,11 @@ const Year = new Date().getFullYear();
 				.then((response) => {
 					if (response.ok) {
 						mensaje =
-							"Gracias por tu mensaje, pronto te estaré respondiendo! Mientras tanto podés visitarme a mi LinkedIn por <a href='https://www.linkedin.com/in/tom%C3%A1s-cabrera/'>aquí</a>";
+							"Grazie per fornire questo messaggio, nel frattempo potete contattarmi tramite il mio profilo in LinkedIn <a href='https://www.linkedin.com/in/tom%C3%A1s-cabrera/'>qui</a>";
 						form.reset();
 					} else {
 						mensaje =
-							"Ha ocurrido un error al intentar enviar el formulario. Inténtalo de nuevo más tarde.";
+							"Un'errore è sucesso al tentare inviare il modulo. Riprova più tardi.";
 					}
 					document
 						.getElementById("mensaje-respuesta")
