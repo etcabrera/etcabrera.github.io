@@ -5,10 +5,11 @@ import { esDict } from "../scripts/dict";
 // Set language
 const url = window.location.href;
 let lang = "es";
-lang = url.includes("en") ? "en" : lang;
-lang = url.includes("it") ? "it" : lang;
+lang = url.includes("en/") ? "en" : lang;
+lang = url.includes("it/") ? "it" : lang;
 document.documentElement.lang = lang;
 
+// Set dictionary
 let dict = {};
 switch (lang) {
     case "en":
@@ -18,9 +19,8 @@ switch (lang) {
         dict = itDict;
         break;
     case "es":
-        dict = esDict;
-        break;
     default:
+        dict = esDict;
         break;
 }
         document.addEventListener("DOMContentLoaded", () => {
