@@ -15,7 +15,7 @@ export const enDict = {
 
 export const itDict = {
     campoObligatorio: "Questo campo è obbligatorio",
-    emailFormato: "Formato email errato",
+    emailFormato: "Formato e-mail non valido",
     mensajeEnviadoError: "Si è verificato un errore durante l'invio del form. Riprova più tardi.",
     mensajeEnviadoExito: "Grazie per fornire questo messaggio, nel frattempo potete contattarmi tramite il mio profilo in LinkedIn <a href='https://www.linkedin.com/in/tom%C3%A1s-cabrera/'>qui</a>"
 }
