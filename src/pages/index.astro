@@ -12,17 +12,23 @@ const Year = new Date().getFullYear();
 
 <BaseLayout title="Mi Portafolio">
 	<nav class="c-nav">
-		<Languages />
+		<Languages aria-label={"Idiomas disponibles"} />
 		Disponible en otros idiomas:
 		<ul class="c-nav__list">
 			<li class="c-nav__item">
-				<a href="#" class="c-nav__item-link">Esp</a>
+				<a href="#" class="c-nav__item-link c-languages__links">Esp</a>
 			</li>
 			<li class="c-nav__item">
-				<a href={getRelativeLocaleUrl("en", "/")} class="c-nav__item-link">Eng</a>
+				<a
+					href={getRelativeLocaleUrl("en", "/")}
+					class="c-nav__item-link c-languages__links">Eng</a
+				>
 			</li>
 			<li class="c-nav__item">
-				<a href={getRelativeLocaleUrl("it", "/")} class="c-nav__item-link">Ita</a>
+				<a
+					href={getRelativeLocaleUrl("it", "/")}
+					class="c-nav__item-link c-languages__links">Ita</a
+				>
 			</li>
 		</ul>
 	</nav>
@@ -33,7 +39,7 @@ const Year = new Date().getFullYear();
 			<p class="c-header__subtitle">UX/UI & Web Developer</p>
 		</section>
 		<section class="c-section" id="sobre-mi">
-			<h2 class="c-section__title">Quién soy?</h2>
+			<h2 class="c-section__title">¿Quién soy?</h2>
 			<div class="c-section__body">
 				Soy un profesional de IT con experiencia en diseño UX y
 				desarrollo web, capaz de cubrir el ciclo completo del diseño,
@@ -50,7 +56,7 @@ const Year = new Date().getFullYear();
 			/>
 		</section>
 		<section class="c-section" id="servicios">
-			<h2 class="c-section__title">Cuáles son mis servicios?</h2>
+			<h2 class="c-section__title">¿Cuáles son mis servicios?</h2>
 			<div class="c-section__body">
 				Como Diseñador UX/UI, ofrezco servicios que abarcan la
 				investigación de usuarios, la creación de wireframes y
@@ -67,11 +73,12 @@ const Year = new Date().getFullYear();
 			<Button
 				className="c-button is-primary"
 				onClick="document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })"
-				text="Contactame ahora!"
+				text="¡Contáctame ahora!"
 			>
 				<Send />
 			</Button>
 		</div>
+		<div class=""></div>
 		<section class="c-section" id="experiencia">
 			<h2 class="c-section__title">Mi experiencia</h2>
 			<div class="c-section__body">
@@ -86,10 +93,10 @@ const Year = new Date().getFullYear();
 			</div>
 		</section>
 		<section class="c-section" id="contacto">
-			<h2 class="c-section__title">Contactame!</h2>
+			<h2 class="c-section__title">¡Contáctame!</h2>
 			<div class="c-section__body">
 				<p>
-					Podés contactarme a través de LinkedIn haciendo click
+					Puedes contactarme a través de LinkedIn haciendo click
 					<a
 						href="https://www.linkedin.com/in/tom%C3%A1s-cabrera/"
 						target="_blank">aquí</a
@@ -105,41 +112,34 @@ const Year = new Date().getFullYear();
 						<label for="nombre"
 							>Nombre <span class="is-required">*</span></label
 						>
-						<input type="text" id="nombre" name="nombre" required />
+						<input type="text" id="nombre" name="nombre" />
 						<span class="c-input__helper-text"></span>
 					</div>
 					<div class="c-form__group">
 						<label for="email"
 							>Email <span class="is-required">*</span></label
 						>
-						<input type="email" id="email" name="email" required />
+						<input type="email" id="email" name="email" />
 						<span class="c-input__helper-text"></span>
 					</div>
 					<div class="c-form__group">
 						<label for="telefono"
 							>Teléfono <span class="is-required">*</span></label
 						>
-						<input
-							type="tel"
-							id="telefono"
-							name="telefono"
-							required
-						/>
+						<input type="tel" id="telefono" name="telefono" />
 						<span class="c-input__helper-text"></span>
 					</div>
 					<div class="c-form__group">
 						<label for="mensaje"
 							>Mensaje <span class="is-required">*</span></label
 						>
-						<textarea id="mensaje" name="mensaje" required
+						<textarea id="mensaje" name="mensaje" maxlength="500"
 						></textarea>
-						<span class="c-input__helper-text"></span>
+						<div class="c-input__helpers">
+							<span class="c-input__helper-text"></span>
+							<span class="c-char__counter"></span>
+						</div>
 					</div>
-					<input
-						type="hidden"
-						name="_autoresponse"
-						value="Muchas gracias por enviar este mensaje, mientras tanto podés contactarme a través de mi perfil en LinkedIn: https://www.linkedin.com/in/tom%C3%A1s-cabrera/"
-					/>
 					<Button
 						className="is-primary"
 						type="submit"
@@ -157,187 +157,4 @@ const Year = new Date().getFullYear();
 		{Year}, Tomás Cabrera. Todos los derechos reservados.
 	</footer>
 </BaseLayout>
-
-<script>
-	document.addEventListener("DOMContentLoaded", () => {
-		// Add 'loaded' class to body to trigger its fade-in animation
-		document.body.classList.add("loaded");
-
-		const sections = document.querySelectorAll(".c-section");
-		const observerOptions = {
-			root: null,
-			rootMargin: "0px",
-			threshold: 0.1, // Adjust threshold as needed, 0.1 means 10% of the element is visible
-		};
-
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				const target = entry.target;
-				if (entry.isIntersecting) {
-					// console.log("Intersecting, making visible:", target.id || target.className);
-					target.classList.add("is-visible");
-					target.classList.remove("is-hidden-up");
-				} else {
-					// Not intersecting
-					// console.log("Not intersecting:", target.id || target.className, "Bottom:", entry.boundingClientRect.bottom, "Top:", entry.boundingClientRect.top);
-					target.classList.remove("is-visible");
-					// Check if the element is now above the viewport
-					if (entry.boundingClientRect.bottom < 0) {
-						// console.log("Element above viewport, adding is-hidden-up:", target.id || target.className);
-						target.classList.add("is-hidden-up");
-					} else {
-						// Element is below the viewport or in a state where it's not "hidden-up"
-						// console.log("Element not above (likely below), removing is-hidden-up:", target.id || target.className);
-						target.classList.remove("is-hidden-up");
-					}
-				}
-			});
-		}, observerOptions);
-
-		sections.forEach((section) => {
-			observer.observe(section);
-		});
-
-		// Validation
-		const runValidations = () => {
-			let isValid = true;
-			// Explicitly type the form elements
-			const nombreInput = document.getElementById(
-				"nombre",
-			) as HTMLInputElement;
-			const emailInput = document.getElementById(
-				"email",
-			) as HTMLInputElement;
-			const telefonoInput = document.getElementById(
-				"telefono",
-			) as HTMLInputElement;
-			const mensajeInput = document.getElementById(
-				"mensaje",
-			) as HTMLTextAreaElement;
-
-			const nombreHelper = document.getElementById("nombre")
-				?.nextElementSibling as HTMLElement;
-			const emailHelper = document.getElementById("email")
-				?.nextElementSibling as HTMLElement;
-			const telefonoHelper = document.getElementById("telefono")
-				?.nextElementSibling as HTMLElement;
-			const mensajeHelper = document.getElementById("mensaje")
-				?.nextElementSibling as HTMLElement;
-
-			const sendButton = document.getElementById(
-				"submit-form",
-			) as HTMLButtonElement;
-			console.log(sendButton);
-
-			// Reset previous invalid states
-			nombreInput.classList.remove("is-invalid");
-			emailInput.classList.remove("is-invalid");
-			telefonoInput.classList.remove("is-invalid");
-			mensajeInput.classList.remove("is-invalid");
-			nombreHelper.innerHTML = "";
-			emailHelper.innerHTML = "";
-			telefonoHelper.innerHTML = "";
-			mensajeHelper.innerHTML = "";
-
-			// Get current values directly for validation
-			const data = {
-				nombre: nombreInput.value,
-				email: emailInput.value,
-				telefono: telefonoInput.value,
-				mensaje: mensajeInput.value,
-			};
-
-			if (!data.nombre) {
-				nombreInput.classList.add("is-invalid");
-				nombreHelper.innerHTML = "Este campo es obligatorio";
-				isValid = false;
-			}
-
-			if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-				emailInput.classList.add("is-invalid");
-				emailHelper.innerHTML = "Formato de email inválido";
-				isValid = false;
-			}
-
-			if (!data.telefono) {
-				telefonoInput.classList.add("is-invalid");
-				telefonoHelper.innerHTML = "Este campo es obligatorio";
-				isValid = false;
-			}
-
-			if (!data.mensaje) {
-				mensajeInput.classList.add("is-invalid");
-				mensajeHelper.innerHTML = "Este campo es obligatorio";
-				isValid = false;
-			}
-
-			if (!isValid) {
-				console.log("Form validation failed");
-				return false; // Indicate validation failure
-			}
-			return true; // Indicate validation success
-		};
-
-		// Debounce function
-		let debounceTimer: number;
-		const debouncedValidate = () => {
-			clearTimeout(debounceTimer);
-			debounceTimer = window.setTimeout(() => {
-				runValidations();
-			}, 500);
-		};
-
-		const form = document.getElementById("contact-form") as HTMLFormElement;
-		const formInputs = form.querySelectorAll("input, textarea");
-
-		formInputs.forEach((input) => {
-			input.addEventListener("keyup", debouncedValidate);
-		});
-
-		form?.addEventListener("submit", (event) => {
-			event.preventDefault(); // Prevents page reload
-
-			if (!runValidations()) {
-				return; // Stop submission if validation fails
-			}
-
-			const formData = new FormData(form);
-			const data: { [key: string]: any } = {};
-			for (const [key, value] of formData.entries()) {
-				data[key] = value;
-			}
-
-			let mensaje = null;
-
-			fetch(
-				"https://formsubmit.co/ajax/a0e7f1761136a918757612b9a39ef47d",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-					},
-					body: JSON.stringify(data),
-				},
-			)
-				.then((response) => {
-					if (response.ok) {
-						mensaje =
-							"Gracias por tu mensaje, pronto te estaré respondiendo! Mientras tanto podés visitarme a mi LinkedIn por <a href='https://www.linkedin.com/in/tom%C3%A1s-cabrera/'>aquí</a>";
-						form.reset();
-					} else {
-						mensaje =
-							"Ha ocurrido un error al intentar enviar el formulario. Inténtalo de nuevo más tarde.";
-					}
-					document
-						.getElementById("mensaje-respuesta")
-						?.removeAttribute("hidden");
-					document.getElementById("mensaje-respuesta")!.innerHTML =
-						mensaje;
-					return response.json();
-				})
-				.then((data) => console.log(data))
-				.catch((error) => console.log(error));
-		});
-	});
-</script>
+<script src="../scripts/index.js"></script>

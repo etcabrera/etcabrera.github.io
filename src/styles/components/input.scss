@@ -3,9 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
+    position: relative;
 
     label {
         color: #281452;
+
         .is-required {
             color: var(--clr-danger-500);
         }
@@ -33,5 +35,16 @@
     .c-input__helper-text {
         color: var(--clr-danger-500);
         font-size: var(--fs-base);
+    }
+
+    .c-input__helpers {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .c-char__counter {
+        font-size: var(--fs-base);
+        text-align: end;
     }
 }

@@ -1,3 +1,30 @@
+.c-caret__effect {
+    position: relative;
+
+    &::after {
+        animation: 1500ms blink ease-out infinite;
+        content: "";
+        color: transparent;
+        height: var(--fs-xxxl);
+        position: absolute;
+        right: -0.5rem;
+        top: 0.5rem;
+        width: 0.15rem;
+    }
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        background-color: transparent;
+    }
+
+    50% {
+        background-color: var(--clr-accent-500);
+    }
+}
+
 #retrato-me {
     bottom: -0.1rem;
     height: 12rem;
@@ -30,29 +57,9 @@
     }
 }
 
-.c-caret__effect {
-    position: relative;
-
-    &::after {
-        animation: 1500ms blink ease-out infinite;
-        content: "";
-        color: transparent;
-        height: var(--fs-xxxl);
-        position: absolute;
-        right: -0.5rem;
-        top: 0.5rem;
-        width: 0.15rem;
-    }
-}
-
-@keyframes blink {
-
-    from,
-    to {
-        background-color: transparent;
-    }
-
-    50% {
-        background-color: var(--clr-accent-500);
+.c-languages__links {
+    color: var(--clr-secondary-050);
+    &:hover, &:visited {
+        color: var(--clr-secondary-200);
     }
 }

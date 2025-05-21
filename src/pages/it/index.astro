@@ -1,11 +1,12 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Send from "@lucide/astro/icons/send";
+import Languages from "@lucide/astro/icons/languages";
+
 import "../index.scss";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import retrato from "../../assets/retrato_blu.png";
 import Button from "../../components/button.astro";
-import Send from "@lucide/astro/icons/send";
-import Languages from "@lucide/astro/icons/languages";
-import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from "astro:i18n";
 
 const Year = new Date().getFullYear();
 ---
@@ -18,17 +19,17 @@ const Year = new Date().getFullYear();
 			<li class="c-nav__item">
 				<a
 					href={getRelativeLocaleUrl("es", "/")}
-					class="c-nav__item-link">Esp</a
+					class="c-nav__item-link c-languages__links">Esp</a
 				>
 			</li>
 			<li class="c-nav__item">
 				<a
 					href={getRelativeLocaleUrl("en", "/")}
-					class="c-nav__item-link">Eng</a
+					class="c-nav__item-link c-languages__links">Eng</a
 				>
 			</li>
 			<li class="c-nav__item">
-				<a href="#" class="c-nav__item-link">Ita</a>
+				<a href="#" class="c-nav__item-link c-languages__links">Ita</a>
 			</li>
 		</ul>
 	</nav>
@@ -99,7 +100,7 @@ const Year = new Date().getFullYear();
 					<a
 						href="https://www.linkedin.com/in/tom%C3%A1s-cabrera/"
 						target="_blank">qui</a
-					>, inviandomi un'email su <a
+					>, inviandomi un'e-mail su <a
 						href="mailto:e.tomas.cabrera@gmail.com"
 						>e.tomas.cabrera@gmail.com</a
 					>
@@ -110,14 +111,14 @@ const Year = new Date().getFullYear();
 						<label for="nombre"
 							>Nome <span class="is-required">*</span></label
 						>
-						<input type="text" id="nombre" name="nombre" required />
+						<input type="text" id="nombre" name="nombre" />
 						<span class="c-input__helper-text"></span>
 					</div>
 					<div class="c-form__group">
 						<label for="email"
-							>Email <span class="is-required">*</span></label
+							>E-mail <span class="is-required">*</span></label
 						>
-						<input type="email" id="email" name="email" required />
+						<input type="email" id="email" name="email" />
 						<span class="c-input__helper-text"></span>
 					</div>
 					<div class="c-form__group">
@@ -128,7 +129,6 @@ const Year = new Date().getFullYear();
 							type="tel"
 							id="telefono"
 							name="telefono"
-							required
 						/>
 						<span class="c-input__helper-text"></span>
 					</div>
@@ -136,9 +136,12 @@ const Year = new Date().getFullYear();
 						<label for="mensaje"
 							>Menssaggio <span class="is-required">*</span></label
 						>
-						<textarea id="mensaje" name="mensaje" required
+						<textarea id="mensaje" name="mensaje"
 						></textarea>
-						<span class="c-input__helper-text"></span>
+						<div class="c-input__helpers">
+							<span class="c-input__helper-text"></span>
+							<span class="c-char__counter"></span>
+						</div>
 					</div>
 					<input
 						type="hidden"
@@ -162,186 +165,4 @@ const Year = new Date().getFullYear();
 		{Year}, Tomás Cabrera. Tutti i diritti riservati.
 	</footer>
 </BaseLayout>
-
-<script>
-	document.addEventListener("DOMContentLoaded", () => {
-		// Add 'loaded' class to body to trigger its fade-in animation
-		document.body.classList.add("loaded");
-
-		const sections = document.querySelectorAll(".c-section");
-		const observerOptions = {
-			root: null,
-			rootMargin: "0px",
-			threshold: 0.1, // Adjust threshold as needed, 0.1 means 10% of the element is visible
-		};
-
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				const target = entry.target;
-				if (entry.isIntersecting) {
-					// console.log("Intersecting, making visible:", target.id || target.className);
-					target.classList.add("is-visible");
-					target.classList.remove("is-hidden-up");
-				} else {
-					// Not intersecting
-					// console.log("Not intersecting:", target.id || target.className, "Bottom:", entry.boundingClientRect.bottom, "Top:", entry.boundingClientRect.top);
-					target.classList.remove("is-visible");
-					// Check if the element is now above the viewport
-					if (entry.boundingClientRect.bottom < 0) {
-						// console.log("Element above viewport, adding is-hidden-up:", target.id || target.className);
-						target.classList.add("is-hidden-up");
-					} else {
-						// Element is below the viewport or in a state where it's not "hidden-up"
-						// console.log("Element not above (likely below), removing is-hidden-up:", target.id || target.className);
-						target.classList.remove("is-hidden-up");
-					}
-				}
-			});
-		}, observerOptions);
-
-		sections.forEach((section) => {
-			observer.observe(section);
-		});
-
-		// Validation
-		const runValidations = () => {
-			let isValid = true;
-			// Explicitly type the form elements
-			const nombreInput = document.getElementById(
-				"nombre",
-			) as HTMLInputElement;
-			const emailInput = document.getElementById(
-				"email",
-			) as HTMLInputElement;
-			const telefonoInput = document.getElementById(
-				"telefono",
-			) as HTMLInputElement;
-			const mensajeInput = document.getElementById(
-				"mensaje",
-			) as HTMLTextAreaElement;
-
-			const nombreHelper = document.getElementById("nombre")
-				?.nextElementSibling as HTMLElement;
-			const emailHelper = document.getElementById("email")
-				?.nextElementSibling as HTMLElement;
-			const telefonoHelper = document.getElementById("telefono")
-				?.nextElementSibling as HTMLElement;
-			const mensajeHelper = document.getElementById("mensaje")
-				?.nextElementSibling as HTMLElement;
-
-			const sendButton = document.getElementById(
-				"submit-form",
-			) as HTMLButtonElement;
-			console.log(sendButton);
-
-			// Reset previous invalid states
-			nombreInput.classList.remove("is-invalid");
-			emailInput.classList.remove("is-invalid");
-			telefonoInput.classList.remove("is-invalid");
-			mensajeInput.classList.remove("is-invalid");
-			nombreHelper.innerHTML = "";
-			emailHelper.innerHTML = "";
-			telefonoHelper.innerHTML = "";
-			mensajeHelper.innerHTML = "";
-
-			// Get current values directly for validation
-			const data = {
-				nombre: nombreInput.value,
-				email: emailInput.value,
-				telefono: telefonoInput.value,
-				mensaje: mensajeInput.value,
-			};
-
-			if (!data.nombre) {
-				nombreInput.classList.add("is-invalid");
-				nombreHelper.innerHTML = "Il campo è obbligatorio";
-				isValid = false;
-			}
-
-			if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-				emailInput.classList.add("is-invalid");
-				emailHelper.innerHTML = "Formato e-mail non valido";
-				isValid = false;
-			}
-
-			if (!data.telefono) {
-				telefonoInput.classList.add("is-invalid");
-				telefonoHelper.innerHTML = "Il campo è obbligatorio";
-				isValid = false;
-			}
-
-			if (!data.mensaje) {
-				mensajeInput.classList.add("is-invalid");
-				mensajeHelper.innerHTML = "Il campo è obbligatorio";
-				isValid = false;
-			}
-
-			if (!isValid) {
-				return false; // Indicate validation failure
-			}
-			return true; // Indicate validation success
-		};
-
-		// Debounce function
-		let debounceTimer: number;
-		const debouncedValidate = () => {
-			clearTimeout(debounceTimer);
-			debounceTimer = window.setTimeout(() => {
-				runValidations();
-			}, 500);
-		};
-
-		const form = document.getElementById("contact-form") as HTMLFormElement;
-		const formInputs = form.querySelectorAll("input, textarea");
-
-		formInputs.forEach((input) => {
-			input.addEventListener("keyup", debouncedValidate);
-		});
-
-		form?.addEventListener("submit", (event) => {
-			event.preventDefault(); // Prevents page reload
-
-			if (!runValidations()) {
-				return; // Stop submission if validation fails
-			}
-
-			const formData = new FormData(form);
-			const data: { [key: string]: any } = {};
-			for (const [key, value] of formData.entries()) {
-				data[key] = value;
-			}
-
-			let mensaje = null;
-
-			fetch(
-				"https://formsubmit.co/ajax/a0e7f1761136a918757612b9a39ef47d",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-					},
-					body: JSON.stringify(data),
-				},
-			)
-				.then((response) => {
-					if (response.ok) {
-						mensaje =
-							"Grazie per fornire questo messaggio, nel frattempo potete contattarmi tramite il mio profilo in LinkedIn <a href='https://www.linkedin.com/in/tom%C3%A1s-cabrera/'>qui</a>";
-						form.reset();
-					} else {
-						mensaje =
-							"Un'errore è sucesso al tentare inviare il modulo. Riprova più tardi.";
-					}
-					document
-						.getElementById("mensaje-respuesta")
-						?.removeAttribute("hidden");
-					document.getElementById("mensaje-respuesta")!.innerHTML =
-						mensaje;
-					return response.json();
-				})
-				.then((data) => console.log(data))
-				.catch((error) => console.log(error));
-		});
-	});
-</script>
+<script src="../../scripts/index.js"></script>
